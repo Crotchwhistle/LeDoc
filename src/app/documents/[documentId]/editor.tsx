@@ -19,6 +19,7 @@ import TextStyle from '@tiptap/extension-text-style'
 import { useEditor, EditorContent } from '@tiptap/react'
 
 import { useEditorStore } from "@/store/use-editor-store"
+import { FontSizeExtenion } from '@/extensions/font-size'
 
 export const Editor = () => {
     const { setEditor } = useEditorStore()
@@ -56,6 +57,7 @@ export const Editor = () => {
         },
         extensions: [
             StarterKit,
+            FontSizeExtenion,
             Link.configure({
                 openOnClick: false,
                 autolink: true,
