@@ -6,6 +6,7 @@ import TaskList from "@tiptap/extension-task-list"
 import { Color } from '@tiptap/extension-color'
 import Highlight from '@tiptap/extension-highlight'
 import Link from '@tiptap/extension-link'
+import TextAlign from '@tiptap/extension-text-align'
 import Table from '@tiptap/extension-table'
 import TableCell from '@tiptap/extension-table-cell'
 import TableHeader from '@tiptap/extension-table-header'
@@ -66,6 +67,9 @@ export const Editor = () => {
             }),
             FontFamily,
             TextStyle,
+            TextAlign.configure({
+                types: ["heading", "paragraph"],
+            }),
             Underline,
             Image,
             ImageResize,
