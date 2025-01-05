@@ -1,4 +1,4 @@
-import { ConvexError, convexToJson, v } from 'convex/values';
+import { ConvexError, v } from 'convex/values';
 import { paginationOptsValidator } from 'convex/server';
 
 import { mutation, query } from './_generated/server';
@@ -12,9 +12,14 @@ export const create = mutation({
             throw new ConvexError("Not authenticated")
         }
 
+        const organisationId = (user.organisation_id ?? undefined) as
+            | string
+            | undefined
+
         return await ctx.db.insert("documents", {
             title: args.title ?? "Untitled document",
             ownerId: user.subject,
+            organisationId,
             initialContent: args.initialContent, 
         })
     },
@@ -29,12 +34,32 @@ export const get = query({
             throw new ConvexError("Not authenticated")
         }
 
+        const organisationId = (user.organisation_id ?? undefined) as
+            | string
+            | undefined
+
+        if (search && organisationId) {
+            return await ctx.db
+                .query("documents")
+                .withSearchIndex("search_title", (q) => 
+                    q.search("title", search).eq("organisationId", organisationId)
+                )
+                .paginate(paginationOpts)
+        }
+
         if (search) {
             return await ctx.db
                 .query("documents")
                 .withSearchIndex("search_title", (q) => q.search("title", search).eq("ownerId", user.subject)
             )
             .paginate(paginationOpts)
+        }
+
+        if (organisationId) {
+            return await ctx.db
+                .query("documents")
+                .withIndex("by_organisation_id", (q) => q.eq("organisationId", organisationId))
+                .paginate(paginationOpts)
         }
 
         return await ctx.db
@@ -53,6 +78,10 @@ export const removeById = mutation({
             throw new ConvexError("Not authenticated")
         }
 
+        const organisationId = (user.organisation_id ?? undefined) as
+            | string
+            | undefined
+
         const document = await ctx.db.get(args.id)
 
         if (!document) {
@@ -60,8 +89,9 @@ export const removeById = mutation({
         }
 
         const isOwner = document.ownerId === user.subject
+        const isOrganisationMember = document.organisationId === organisationId
 
-        if (!isOwner) {
+        if (!isOwner && !isOrganisationMember) {
             throw new ConvexError("Not authorised")
         }
 
@@ -78,6 +108,10 @@ export const updateById = mutation({
             throw new ConvexError("Not authenticated")
         }
 
+        const organisationId = (user.organisation_id ?? undefined) as
+            | string
+            | undefined
+
         const document = await ctx.db.get(args.id)
 
         if (!document) {
@@ -85,8 +119,9 @@ export const updateById = mutation({
         }
 
         const isOwner = document.ownerId === user.subject
+        const isOrganisationMember = document.organisationId === organisationId
 
-        if (!isOwner) {
+        if (!isOwner && !isOrganisationMember) {
             throw new ConvexError("Not authorised")
         }
 
