@@ -89,7 +89,7 @@ export const removeById = mutation({
         }
 
         const isOwner = document.ownerId === user.subject
-        const isOrganisationMember = document.organisationId === organisationId
+        const isOrganisationMember = !!(document.organisationId && document.organisationId === organisationId)
 
         if (!isOwner && !isOrganisationMember) {
             throw new ConvexError("Not authorised")
@@ -119,7 +119,7 @@ export const updateById = mutation({
         }
 
         const isOwner = document.ownerId === user.subject
-        const isOrganisationMember = document.organisationId === organisationId
+        const isOrganisationMember = !!(document.organisationId && document.organisationId === organisationId)
 
         if (!isOwner && !isOrganisationMember) {
             throw new ConvexError("Not authorised")
@@ -127,4 +127,11 @@ export const updateById = mutation({
 
         return await ctx.db.patch(args.id, { title: args.title })
     }
+})
+
+export const getById = query({
+    args: { id: v.id("documents") },
+    handler: async (ctx, { id }) => {
+        return await ctx.db.get(id)
+    },
 })
