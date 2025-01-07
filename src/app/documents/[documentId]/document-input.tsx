@@ -69,7 +69,7 @@ export const DocumentInput = ({ title, id }: DocumentInputProps) => {
                         value={value}
                         onChange={onChange}
                         onBlur={() => setIsEditing(false)}
-                        className="absolute inset-0 text-lg text-black px-1.5 bg-transparent truncate"
+                        className="absolute inset-0 text-lg px-1.5 bg-transparent truncate"
                     />
                 </form>
             ) : (
@@ -86,7 +86,7 @@ export const DocumentInput = ({ title, id }: DocumentInputProps) => {
                 </span>
             )}
             {showError && <BsCloudSlash className="size-4"/>}
-            {!showError && !showLoader && <BsCloudCheck />}
+            {!showError && !showLoader && <BsCloudCheck/>}
             {showLoader && <LoaderIcon className="size-4 animate-spin text-muted-foreground"/>}
         </div>
     )

@@ -26,7 +26,7 @@ export const Inbox = () => {
                     > 
                         <BellIcon className="size-5"/>
                     </Button>
-                    <Separator orientation="vertical" className="h-6"/>
+                    <Separator orientation="vertical" className="h-6 bg-[#EEEEEE]"/>
                 </>
             }
         >
@@ -49,13 +49,13 @@ const InboxMenu = () => {
                     > 
                         <BellIcon className="size-5"/>
                         {inboxNotifications.length > 0 && (
-                            <span className="absolute -top-1 -right-1 size-4 rounded-full bg-sky-500 text-xs text-white flex items-center justify-center">
+                            <span className="absolute -top-1 -right-1 size-4 rounded-full bg-rose-700 text-xs text-white flex items-center justify-center">
                                 {inboxNotifications.length}
                             </span>
                         )}
                     </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-auto">
+                <DropdownMenuContent align="end" className="w-auto bg-[#EEEEEE] border border-[#EEEEEE]">
                     {inboxNotifications.length > 0 ? (
                         <InboxNotificationList>
                             {inboxNotifications.map((inboxNotification) => (

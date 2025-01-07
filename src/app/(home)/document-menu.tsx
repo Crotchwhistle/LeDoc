@@ -22,11 +22,11 @@ export const DocumentMenu = ({ documentId, title, onNewTab }: DocumentMenuProps)
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="rounded-full">
+                <Button variant="ghost" size="icon" className="rounded-full text-white hover:bg-[#FFF]">
                     <MoreVertical className="size-5"/>
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent>
+            <DropdownMenuContent className="bg-[#222831] text-white border-[#1c2229]">
 
                 <RenameDialog documentId={documentId} initialTitle={title}>
                     <DropdownMenuItem

@@ -158,7 +158,7 @@ const Marker = ({
                     height: "100vh",
                     width: "1px",
                     transform: "scaleX(0.5)",
-                    backgroundColor: "#3b72f6",
+                    backgroundColor: "#000000",
                     display: isDragging ? "block" : "none",
                 }}
             />

@@ -652,23 +652,23 @@ export const Toolbar = () => {
     ];
 
     return (
-        <div className="bg-[#F1F4F9] px-2.5 py-0.5 rounded-[24px] min-h-[40px] flex items-center gap-x-0.5 overflow-x-auto">
+        <div className="bg-[#8dbdc0] px-2.5 py-0.5 rounded-[24px] min-h-[40px] flex items-center gap-x-0.5 overflow-x-auto text-neutral-900">
             {sections[0].map((item) => (
                 <ToolbarButton key={item.label} {...item} />
             ))}
-            <Separator orientation="vertical" className="h-6 bg-neutral-300" />
+            <Separator orientation="vertical" className="h-6 bg-[#000]" />
             <FontFamilyButton />
-            <Separator orientation="vertical" className="h-6 bg-neutral-300" />
+            <Separator orientation="vertical" className="h-6 bg-[#000]" />
             <HeadingLevelButton />
-            <Separator orientation="vertical" className="h-6 bg-neutral-300" />
+            <Separator orientation="vertical" className="h-6 bg-[#000]" />
             <FontSizeButton />
-            <Separator orientation="vertical" className="h-6 bg-neutral-300" />
+            <Separator orientation="vertical" className="h-6 bg-[#000]" />
             {sections[1].map((item) => (
                 <ToolbarButton key={item.label} {...item} />
             ))}
             <TextColorButton />
             <HighlightColorButton />
-            <Separator orientation="vertical" className="h-6 bg-neutral-300" />
+            <Separator orientation="vertical" className="h-6 bg-[#000]" />
             <LinkButton />
             <ImageButton />
             <AlignButton />

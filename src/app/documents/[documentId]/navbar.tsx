@@ -301,7 +301,7 @@ export const Navbar = ({ data }: NavbarProps) => {
                     </div>
                 </div>
             </div>
-            <div className="flex gap-3 items-center pl-6">
+            <div className="flex gap-3 items-center pl-6 pt-2 pb-2 pr-3 rounded-full bg-muted">
                 <Avatars />
                 <Inbox />
                 <OrganizationSwitcher 
